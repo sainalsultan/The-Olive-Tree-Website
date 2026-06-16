@@ -23,8 +23,8 @@ export default function ApiKeyModal({ isOpen, onSave, onClose, initialKey = '' }
       <div className="modal-box">
         <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
         <div className="modal-icon">🔑</div>
-        <h2>OpenRouter API Key</h2>
-        <p>Enter your OpenRouter API key to enable the AI assistant. Your key is stored only in your browser.</p>
+        <h2>API Key</h2>
+        <p>Enter your API key to enable the AI assistant. Your key is stored only in your browser.</p>
         <input
           ref={inputRef}
           type="password"

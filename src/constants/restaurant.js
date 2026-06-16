@@ -3,18 +3,18 @@ export const MODEL = 'google/gemini-2.5-flash-lite';
 
 export const MENU_DATA = {
   starters: [
-    { name: 'Burrata with Heirloom Tomatoes', desc: 'Fresh burrata, heritage tomatoes, basil oil, sea salt', price: '€14', vegetarian: true },
-    { name: 'Grilled Octopus', desc: 'Chargrilled tentacles, lemon, capers, smoked paprika', price: '€17', vegetarian: false },
-    { name: 'Mezze Platter for 2', desc: 'Hummus, baba ganoush, falafel, warm flatbread, olives', price: '€22', vegetarian: true },
+    { name: 'Burrata with Heirloom Tomatoes', desc: 'Fresh burrata, heritage tomatoes, basil oil, sea salt', price: '€14', vegetarian: true, image: '/images/restaurant.jpeg' },
+    { name: 'Grilled Octopus', desc: 'Chargrilled tentacles, lemon, capers, smoked paprika', price: '€17', vegetarian: false , image: '/images/restaurant.jpeg'},
+    { name: 'Mezze Platter for 2', desc: 'Hummus, baba ganoush, falafel, warm flatbread, olives', price: '€22', vegetarian: true , image: '/images/restaurant.jpeg'},
   ],
   mains: [
-    { name: 'Branzino with Lemon Butter', desc: 'Whole sea bass, lemon butter sauce, seasonal vegetables', price: '€28', vegetarian: false },
-    { name: 'Lamb Chops with Rosemary', desc: 'Grilled lamb, rosemary jus, roasted potatoes, mint yoghurt', price: '€32', vegetarian: false },
-    { name: 'Mushroom Risotto', desc: 'Wild mushrooms, parmesan, truffle oil, fresh herbs', price: '€22', vegetarian: true },
+    { name: 'Branzino with Lemon Butter', desc: 'Whole sea bass, lemon butter sauce, seasonal vegetables', price: '€28', vegetarian: false , image: '/images/restaurant.jpeg'},
+    { name: 'Lamb Chops with Rosemary', desc: 'Grilled lamb, rosemary jus, roasted potatoes, mint yoghurt', price: '€32', vegetarian: false , image: '/images/restaurant.jpeg'},
+    { name: 'Mushroom Risotto', desc: 'Wild mushrooms, parmesan, truffle oil, fresh herbs', price: '€22', vegetarian: true , image: '/images/restaurant.jpeg'},
   ],
   desserts: [
-    { name: 'Baklava Cheesecake', desc: 'Creamy cheesecake, pistachio baklava crust, rose water', price: '€10', vegetarian: true },
-    { name: 'Citrus Panna Cotta', desc: 'Vanilla panna cotta, orange & lemon curd, candied zest', price: '€9', vegetarian: true },
+    { name: 'Baklava Cheesecake', desc: 'Creamy cheesecake, pistachio baklava crust, rose water', price: '€10', vegetarian: true , image: '/images/restaurant.jpeg'},
+    { name: 'Citrus Panna Cotta', desc: 'Vanilla panna cotta, orange & lemon curd, candied zest', price: '€9', vegetarian: true , image: '/images/restaurant.jpeg'},
   ],
   setMenus: {
     lunch: { courses: [{ label: '2 courses', price: '€22' }, { label: '3 courses', price: '€28' }], note: 'Mon–Fri 12pm–2:30pm' },
@@ -23,9 +23,21 @@ export const MENU_DATA = {
 };
 
 export const HOURS = [
-  { day: 'Monday–Friday', hours: '12:00pm–2:30pm & 7:00pm–10:30pm' },
-  { day: 'Saturday', hours: '7:00pm–11:00pm (dinner only)' },
-  { day: 'Sunday', hours: 'Closed', closed: true },
+  {
+    day: 'Monday – Friday',
+    slots: [{ label: 'Lunch', time: '12:00pm – 2:30pm' },{ label: 'Dinner', time: '7:00pm – 10:30pm' }],
+    closed: false,
+  },
+  {
+    day: 'Saturday',
+    slots: [{ label: 'Dinner', time: '7:00pm – 11:00pm' }],
+    closed: false,
+  },
+  {
+    day: 'Sunday',
+    slots: [],
+    closed: true,
+  },
 ];
 
 export const FEATURES = [

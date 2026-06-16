@@ -2,9 +2,10 @@ import { useEffect, useState, useCallback } from 'react';
 import LeafIcon from './LeafIcon';
 
 const NAV_LINKS = [
+  { href: '#hero', label: 'Home' },
   { href: '#about', label: 'About' },
   { href: '#menu',  label: 'Menu' },
-  { href: '#contact', label: 'Hours & Contact' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 export default function Navbar({ onReserve }) {

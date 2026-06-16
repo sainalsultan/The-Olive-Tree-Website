@@ -1,0 +1,166 @@
+/* ════════════════════════════════════════
+   MENU — tab sidebar + card grid layout
+   Ganti seluruh blok /* ── MENU ── */
+
+/* ── Header row ── */
+.mn-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+.mn-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 500;
+  color: var(--cream);
+  margin: 0.3rem 0 0;
+  line-height: 1.1;
+}
+.mn-h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--olive);
+}
+.mn-arrows { display: flex; gap: 8px; }
+.mn-arrow {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+.mn-arrow:hover,
+.mn-arrow-active {
+  background: var(--olive);
+  border-color: var(--olive);
+  color: #0f1a0a;
+}
+
+/* ── Body: sidebar + content ── */
+.mn-body {
+  display: grid;
+  grid-template-columns: 175px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Tab sidebar */
+.mn-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mn-tab {
+  width: 100%;
+  padding: 0.7rem 1.1rem;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(232,226,216,0.5);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.18s, background 0.18s;
+}
+.mn-tab:hover {
+  color: var(--text);
+}
+.mn-tab-active {
+  background: var(--dark-3);
+  color: var(--olive);
+  border-color: var(--olive);
+  font-weight: 500;
+}
+
+/* Card grid */
+.mn-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* Individual card */
+.mn-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.mn-card:hover {
+  border-color: rgba(138,170,107,0.3);
+  transform: translateY(-3px);
+}
+.mn-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #2a2a20;
+  display: flex; align-items: center; justify-content: center;
+}
+.mn-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.mn-card-emoji { font-size: 2.8rem; }
+
+.mn-card-body { padding: 1rem 1rem 1.1rem; }
+.mn-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 500;
+  color: var(--cream); margin: 0 0 5px;
+}
+.mn-card-desc {
+  font-size: 12px; line-height: 1.6;
+  color: var(--text-dim); margin: 0 0 0.75rem;
+}
+.mn-card-footer {
+  display: flex; align-items: center;
+  justify-content: space-between;
+}
+.mn-card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 500;
+  color: var(--olive);
+}
+
+/* Set menus area */
+.mn-setmenus { padding: 0.5rem 0; }
+
+/* ── Footer row ── */
+.mn-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.mn-footer .menu-diet-note { margin: 0; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .mn-body { grid-template-columns: 1fr; }
+  .mn-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .mn-tab { width: auto; }
+  .mn-cards { grid-template-columns: 1fr 1fr; }
+  .mn-footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .button-primary{width: 100%;}
+}
+@media (max-width: 480px) {
+  .mn-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .mn-cards { grid-template-columns: 1fr; }
+  .set-menu-cards { grid-template-columns: 1fr; }
+}

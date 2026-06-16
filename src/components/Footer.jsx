@@ -9,7 +9,7 @@ export default function Footer() {
           The Olive Tree
         </div>
         <p>12 Rue de la Paix, 75002 Paris &nbsp;·&nbsp; +33 1 42 00 00 00</p>
-        <p className="footer-copy">© 2025 The Olive Tree Paris. All rights reserved.</p>
+        <p className="footer-copy">© 2026 The Olive Tree Paris. All rights reserved.</p>
       </div>
     </footer>
   );
