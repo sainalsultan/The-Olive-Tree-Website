@@ -5,12 +5,12 @@ export default function Hero({ onReserve }) {
     <section className="hero" id="hero">
       <div className="hero-bg-gradient" />
       <div className="hero-content">
-        <div className="badge">Paris · Mediterranean</div>
+        <div className="badge">Paris · Traditional French</div>
         <div className="logo-leaf" aria-hidden="true">
           <LeafIcon size={52} opacity={0.9} />
         </div>
-        <h1>The Olive Tree</h1>
-        <p className="tagline">Fresh Mediterranean cuisine in the heart of Paris</p>
+        <h1>Le Petit Bistrot</h1>
+        <p className="tagline">Traditional French cuisine in the heart of Paris</p>
         <p className="hero-sub">Seasonal ingredients. Warm atmosphere. A table worth remembering.</p>
         <div className="hero-actions">
           <button className="btn-primary" onClick={onReserve}>Reserve a Table</button>

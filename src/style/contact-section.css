@@ -125,7 +125,7 @@
 .ct-info { display: flex; flex-direction: column; gap: 14px; }
 .ct-info-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 13px;
 }
 .ct-info-icon {
@@ -154,7 +154,7 @@
   font-size: 13.5px;
   color: var(--dark);
   text-decoration: none;
-  display: block;
+  display: block; 
 }
 .ct-info-body a:hover { color: var(--olive-dk); }
 

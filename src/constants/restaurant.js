@@ -1,140 +1,208 @@
-export const OPENROUTER_API = 'https://openrouter.ai/api/v1/chat/completions';
-export const MODEL = 'google/gemini-2.5-flash-lite';
+// ─────────────────────────────────────────────
+//  restaurant.js  –  Le Petit Bistrot
+//  AI service: Anthropic Claude (claude-sonnet-4-6)
+//  Knowledge base: loaded from faq-le-petit-bistrot-demo.md at runtime
+//  SYSTEM_PROMPT has been removed — built dynamically in useChat.js
+// ─────────────────────────────────────────────
 
+// export const ANTHROPIC_API = "http://localhost:3001/api/chat";
+export const ANTHROPIC_API = "https://web-production-298ea8.up.railway.app";
+export const MODEL = "claude-haiku-4-5-20251001";
+export const ANTHROPIC_VERSION = "2023-06-01";
+
+// ---------------------------------------------------------------------------
+// Menu data (mirrors the .md knowledge base — used for UI rendering only)
+// ---------------------------------------------------------------------------
 export const MENU_DATA = {
   starters: [
-    { name: 'Burrata with Heirloom Tomatoes', desc: 'Fresh burrata, heritage tomatoes, basil oil, sea salt', price: '€14', vegetarian: true, image: '/images/restaurant.jpeg' },
-    { name: 'Grilled Octopus', desc: 'Chargrilled tentacles, lemon, capers, smoked paprika', price: '€17', vegetarian: false , image: '/images/restaurant.jpeg'},
-    { name: 'Mezze Platter for 2', desc: 'Hummus, baba ganoush, falafel, warm flatbread, olives', price: '€22', vegetarian: true , image: '/images/restaurant.jpeg'},
+    {
+      name: "Soupe à l'oignon gratinée",
+      desc: "Classic French onion soup with a golden gruyère crust",
+      price: "€9",
+      vegetarian: true,
+      image: "/images/menu/img-starters1.jpeg",
+    },
+    {
+      name: "Foie gras maison",
+      desc: "House-made foie gras, toasted brioche, Sauternes jelly",
+      price: "€16",
+      vegetarian: false,
+      image: "/images/menu/img-starters2.jpeg",
+    },
+    {
+      name: "Salade de chèvre chaud",
+      desc: "Warm goat cheese salad, honey & walnuts",
+      price: "€12",
+      vegetarian: true,
+      image: "/images/menu/img-starters3.jpeg",
+    },
   ],
   mains: [
-    { name: 'Branzino with Lemon Butter', desc: 'Whole sea bass, lemon butter sauce, seasonal vegetables', price: '€28', vegetarian: false , image: '/images/restaurant.jpeg'},
-    { name: 'Lamb Chops with Rosemary', desc: 'Grilled lamb, rosemary jus, roasted potatoes, mint yoghurt', price: '€32', vegetarian: false , image: '/images/restaurant.jpeg'},
-    { name: 'Mushroom Risotto', desc: 'Wild mushrooms, parmesan, truffle oil, fresh herbs', price: '€22', vegetarian: true , image: '/images/restaurant.jpeg'},
+    {
+      name: "Confit de canard",
+      desc: "Duck confit, pommes sarladaises, seasonal vegetables",
+      price: "€24",
+      vegetarian: false,
+      image: "/images/menu/img-mains1.jpeg",
+    },
+    {
+      name: "Sole meunière",
+      desc: "Pan-fried sole, lemon butter sauce, steamed potatoes",
+      price: "€28",
+      vegetarian: false,
+      image: "/images/menu/img-mains2.jpeg",
+    },
+    {
+      name: "Risotto aux champignons des bois",
+      desc: "Wild mushroom risotto, parmesan, fresh herbs",
+      price: "€19",
+      vegetarian: true,
+      image: "/images/menu/img-mains3.jpeg",
+    },
   ],
   desserts: [
-    { name: 'Baklava Cheesecake', desc: 'Creamy cheesecake, pistachio baklava crust, rose water', price: '€10', vegetarian: true , image: '/images/restaurant.jpeg'},
-    { name: 'Citrus Panna Cotta', desc: 'Vanilla panna cotta, orange & lemon curd, candied zest', price: '€9', vegetarian: true , image: '/images/restaurant.jpeg'},
+    {
+      name: "Crème brûlée à la vanille",
+      desc: "Classic vanilla crème brûlée with a caramelised crust",
+      price: "€8",
+      vegetarian: true,
+      image: "/images/menu/img-desserts1.jpeg",
+    },
+    {
+      name: "Tarte tatin",
+      desc: "Upside-down apple tart served warm with crème fraîche",
+      price: "€9",
+      vegetarian: true,
+      image: "/images/menu/img-desserts2.jpeg",
+    },
+    {
+      name: "Moelleux au chocolat",
+      desc: "Warm chocolate fondant, vanilla ice cream",
+      price: "€9",
+      vegetarian: true,
+      image: "/images/menu/img-desserts3.jpeg",
+    },
+  ],
+  drinks: [
+    {
+      name: "Sélection de vins français",
+      desc: "Curated French wine list by our sommelier — by the glass from €6",
+      price: "From €6",
+      vegetarian: true,
+      image: "/images/menu/img-drinks1.jpeg",
+    },
+    {
+      name: "Kir Royale",
+      desc: "Classic French aperitif — crème de cassis topped with champagne",
+      price: "€10",
+      vegetarian: true,
+      image: "/images/menu/img-drinks2.jpeg",
+    },
+    {
+      name: "Pastis",
+      desc: "Traditional anise-flavoured French aperitif, served with water and ice",
+      price: "€9",
+      vegetarian: true,
+      image: "/images/menu/img-drinks3.jpeg",
+    },
+    {
+      name: "Spritz",
+      desc: "Refreshing aperitif with sparkling wine, bitters, and soda",
+      price: "€12",
+      vegetarian: true,
+      image: "/images/menu/img-drinks4.jpeg",
+    },
+    {
+      name: "Limonade maison",
+      desc: "Homemade lemonade, fresh and lightly sweetened",
+      price: "€5",
+      vegetarian: true,
+      image: "/images/menu/img-drinks5.jpeg",
+    },
+    {
+      name: "Jus de fruits frais",
+      desc: "Fresh seasonal fruit juices",
+      price: "€5",
+      vegetarian: true,
+      image: "/images/menu/img-drinks6.jpeg",
+    },
   ],
   setMenus: {
-    lunch: { courses: [{ label: '2 courses', price: '€22' }, { label: '3 courses', price: '€28' }], note: 'Mon–Fri 12pm–2:30pm' },
-    dinner: { courses: [{ label: '4 courses', price: '€55' }], note: 'Available every evening', featured: true },
+    lunch: {
+      courses: [
+        { label: "Starter + Main or Main + Dessert", price: "€22" },
+        { label: "3 courses", price: "€28" },
+      ],
+      note: "Tue–Fri 12:00 PM – 2:30 PM",
+    },
+    dinner: {
+      courses: [{ label: "À la carte (avg per person)", price: "€45–55" }],
+      note: "Available Tue–Sat evenings",
+      featured: true,
+    },
   },
 };
 
+// ---------------------------------------------------------------------------
+// Opening hours (used for UI rendering)
+// ---------------------------------------------------------------------------
 export const HOURS = [
   {
-    day: 'Monday – Friday',
-    slots: [{ label: 'Lunch', time: '12:00pm – 2:30pm' },{ label: 'Dinner', time: '7:00pm – 10:30pm' }],
-    closed: false,
-  },
-  {
-    day: 'Saturday',
-    slots: [{ label: 'Dinner', time: '7:00pm – 11:00pm' }],
-    closed: false,
-  },
-  {
-    day: 'Sunday',
+    day: "Monday",
     slots: [],
     closed: true,
   },
+  {
+    day: "Tuesday – Friday",
+    slots: [
+      { label: "Lunch", time: "12:00 PM – 2:30 PM" },
+      { label: "Dinner", time: "7:00 PM – 10:30 PM" },
+    ],
+    closed: false,
+  },
+  {
+    day: "Saturday",
+    slots: [{ label: "Dinner", time: "7:00 PM – 11:00 PM" }],
+    closed: false,
+  },
+  {
+    day: "Sunday",
+    slots: [{ label: "Brunch", time: "12:00 PM – 3:00 PM" }],
+    closed: false,
+  },
 ];
 
+// ---------------------------------------------------------------------------
+// Restaurant features (used for UI rendering)
+// ---------------------------------------------------------------------------
 export const FEATURES = [
-  { icon: '🌿', title: 'Seasonal & Fresh', desc: 'Our menu changes with the seasons. We work directly with small producers across the Mediterranean.' },
-  { icon: '🍷', title: 'Curated Wine List', desc: 'Natural wines from Greece, Lebanon and southern France — selected personally by our sommelier.' },
-  { icon: '🎉', title: 'Private Events', desc: 'Privatise the full restaurant for groups of 20–40. Perfect for celebrations and corporate dinners.' },
-  { icon: '🥗', title: 'Dietary Friendly', desc: 'Vegetarian and gluten-free options available. Just let us know — we\'ll take care of you.' },
+  {
+    icon: "🥐",
+    title: "Authentic French Bistrot",
+    desc: "Traditional recipes made with seasonal ingredients sourced from local French producers.",
+  },
+  {
+    icon: "🍷",
+    title: "Curated Wine List",
+    desc: "French wines only, hand-picked by our sommelier — available by the glass from €6.",
+  },
+  {
+    icon: "🎉",
+    title: "Private Events",
+    desc: "Private room for up to 20 guests. Perfect for birthdays, celebrations, and corporate dinners.",
+  },
+  {
+    icon: "🥗",
+    title: "Dietary Friendly",
+    desc: "Vegetarian options always available. Vegan and gluten-free options on request.",
+  },
 ];
 
+// ---------------------------------------------------------------------------
+// Stats (used for UI rendering)
+// ---------------------------------------------------------------------------
 export const STATS = [
-  { value: '12+', label: 'Years serving Paris' },
-  { value: '100%', label: 'Fresh daily menu' },
-  { value: '4.9 ★', label: 'Google rating' },
+  { value: "1992", label: "Est. in Paris" },
+  { value: "100%", label: "Seasonal menu" },
+  { value: "4.8 ★", label: "Google rating" },
 ];
-
-export const SYSTEM_PROMPT = `You are the friendly AI assistant for The Olive Tree, a mid-upscale Mediterranean restaurant at 12 Rue de la Paix, 75002 Paris.
-
-You speak as "The Olive Tree team" — warm, welcoming, concise. Max 2–4 sentences per reply. Never sound robotic or corporate.
-
-GOOD TONE EXAMPLE:
-"We'd love to have you! We're open for dinner on Saturdays from 7pm to 11pm. Shall I help you book a table?"
-
-BAD TONE EXAMPLE:
-"According to our database, Saturday dinner service commences at 19:00 and concludes at 23:00."
-
-━━━ RESTAURANT KNOWLEDGE BASE ━━━
-
-CONTACT & LOCATION:
-- Address: 12 Rue de la Paix, 75002 Paris
-- Phone: +33 1 42 00 00 00
-- Email: hello@theolivetree-paris.com
-- Parking: No private parking. Nearest: Parking Vendôme, 2 min walk
-
-OPENING HOURS:
-- Monday–Friday: 12:00pm–2:30pm (lunch) and 7:00pm–10:30pm (dinner)
-- Saturday: 7:00pm–11:00pm (dinner only — no lunch on Saturdays)
-- Sunday: Closed
-
-RESERVATIONS:
-- Accepted for lunch and dinner, up to 2 weeks in advance
-- Groups of 6 or more must call us directly on +33 1 42 00 00 00
-- Cancellation policy: free cancellation up to 24 hours before; late cancellations may incur a €20/person fee
-
-MENU:
-Starters:
-- Burrata with Heirloom Tomatoes — €14 (V)
-- Grilled Octopus — €17
-- Mezze Platter for 2 — €22 (V)
-
-Mains:
-- Branzino with Lemon Butter — €28
-- Lamb Chops with Rosemary — €32
-- Mushroom Risotto — €22 (V)
-
-Desserts:
-- Baklava Cheesecake — €10 (V)
-- Citrus Panna Cotta — €9 (V)
-
-Set Menus:
-- Lunch: 2 courses €22 / 3 courses €28 (Mon–Fri only)
-- Dinner Tasting Menu: 4 courses €55
-
-DIETARY:
-- Vegetarian options are available and marked (V) on the menu
-- Gluten-free options available on request — guests should inform their server
-- Nut allergy: the kitchen handles nuts. Guests with severe nut allergies should inform staff on arrival
-
-PRIVATE EVENTS:
-- The restaurant can be privatised for groups of 20–40 people
-- For availability and pricing, contact us at hello@theolivetree-paris.com
-
-━━━ BOOKING SYSTEM ━━━
-
-When a guest wants to book a table, collect these details naturally through conversation:
-1. Name for the reservation
-2. Date
-3. Time (available: 12pm or 1pm for lunch Mon–Fri; 7pm, 7:30pm, 8pm, 8:30pm, 9pm for dinner)
-4. Party size
-5. Any special occasion or dietary needs (optional — ask briefly)
-
-Important rules:
-- If party size is 6 or more, do NOT confirm the booking. Instead say: "For groups of 6 or more, we'd ask you to call us directly on +33 1 42 00 00 00 so we can make sure everything is perfect for you!"
-- If the guest wants Saturday lunch, let them know Saturday is dinner only (from 7pm)
-- If the guest wants Sunday, let them know we're closed on Sundays
-
-When ALL required details are collected (name, date, time, party size), respond ONLY with this — nothing before or after:
-BOOKING_CONFIRMED:{"name":"NAME","date":"DATE","time":"TIME","guests":N,"occasion":"OCCASION or none"}
-
-━━━ OUT OF SCOPE ━━━
-
-If asked something unrelated to the restaurant (weather, general questions, etc.), say:
-"I'm here to help with anything related to The Olive Tree — feel free to ask about our menu, reservations, or opening hours!"
-
-━━━ SUGGESTIONS RULE ━━━
-
-After EVERY reply (except BOOKING_CONFIRMED and group-redirect), append on a new line:
-SUGGESTIONS:["chip 1","chip 2","chip 3"]
-- 2–4 chips, each under 40 characters, with a relevant emoji
-- Make them specific and natural follow-ups to what was just discussed
-- Examples: ["🍽️ Book a table","🥗 Vegetarian options?","🍷 Tell me about the wine list"]`;

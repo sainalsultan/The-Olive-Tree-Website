@@ -9,22 +9,30 @@ import ApiKeyModal from './components/ApiKeyModal';
 import BookingView from './components/BookingView';
 import ChatWidget from './components/ChatWidget';
 import ChatFab from './components/ChatFab';
-import { useApiKey } from './hooks/useApiKey';
+// import { useApiKey } from './hooks/useApiKey';
+// import { useChat } from './hooks/useChat';
+// import { useChat } from './hooks/useChat.gemini';
 import { useChat } from './hooks/useChat';
 
 export default function App() {
-  const { apiKey, saveKey } = useApiKey();
+  // const { apiKey, saveKey } = useApiKey();
   const [chatOpen, setChatOpen] = useState(false);
   const [chatGreeted, setChatGreeted] = useState(false);
   const [apiModalOpen, setApiModalOpen] = useState(false);
 
-  const { messages, suggestions, setSuggestions, isBusy, booking, greet, send, resetAfterBooking, modifyBooking } = useChat(apiKey);
+  // const { messages, suggestions, setSuggestions, isBusy, booking, greet, send, resetAfterBooking, modifyBooking } = useChat(apiKey);
+  // const openChat = useCallback(() => {
+  //   if (!apiKey) { setApiModalOpen(true); return; }
+  //   setChatOpen(true);
+  //   if (!chatGreeted) { setChatGreeted(true); setTimeout(greet, 350); }
+  // }, [apiKey, chatGreeted, greet]);
+
+  const { messages, suggestions, setSuggestions, isBusy, booking, greet, send, resetAfterBooking, modifyBooking } = useChat();
 
   const openChat = useCallback(() => {
-    if (!apiKey) { setApiModalOpen(true); return; }
     setChatOpen(true);
     if (!chatGreeted) { setChatGreeted(true); setTimeout(greet, 350); }
-  }, [apiKey, chatGreeted, greet]);
+  }, [chatGreeted, greet]);
 
   const closeChat = () => setChatOpen(false);
 
@@ -59,12 +67,12 @@ export default function App() {
       <Contact />
       <Footer />
 
-      <ApiKeyModal
+      {/* <ApiKeyModal
         isOpen={apiModalOpen}
         onSave={handleSaveKey}
         onClose={() => setApiModalOpen(false)}
         initialKey={apiKey}
-      />
+      /> */}
 
       <BookingView
         booking={booking}

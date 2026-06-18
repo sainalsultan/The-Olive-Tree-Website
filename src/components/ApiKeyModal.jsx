@@ -31,13 +31,14 @@ export default function ApiKeyModal({ isOpen, onSave, onClose, initialKey = '' }
           value={value}
           onChange={(e) => { setValue(e.target.value); setError(false); }}
           onKeyDown={(e) => e.key === 'Enter' && handleSave()}
-          placeholder="sk-or-v1-..."
+          placeholder="Enter your API key..."
           autoComplete="off"
           style={error ? { borderColor: '#e05252' } : {}}
         />
         <div className="modal-actions">
           <button className="btn-primary" onClick={handleSave}>Connect AI</button>
-          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="btn-link">
+          {/* <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="btn-link"> */}
+          <a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer" className="btn-link">
             Get a free key →
           </a>
         </div>

@@ -6,10 +6,10 @@ export default function Footer() {
       <div className="container footer-inner">
         <div className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <LeafIcon size={24} />
-          The Olive Tree
+          Le Petit Bistrot
         </div>
-        <p>12 Rue de la Paix, 75002 Paris &nbsp;·&nbsp; +33 1 42 00 00 00</p>
-        <p className="footer-copy">© 2026 The Olive Tree Paris. All rights reserved.</p>
+        <p>24 Rue des Martyrs, 75009 Paris, France &nbsp;·&nbsp; +33 1 42 00 00 00</p>
+        <p className="footer-copy">© 2026 Le Petit Bistrot. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -45,7 +45,7 @@ export default function Navbar({ onReserve }) {
         <div className="nav-inner">
           <a href="#hero" className="nav-logo" onClick={(e) => handleNavLink(e, '#hero')}>
             <span className="nav-leaf"><LeafIcon size={24} /></span>
-            The Olive Tree
+            Le Petit Bistrot
           </a>
 
           {/* Desktop links */}

@@ -46,11 +46,10 @@ export default function ChatWidget({ isOpen, onClose, onResetKey, messages, sugg
           <span className="badge-online" aria-label="Online" />
         </div>
         <div className="chat-header-info">
-          <strong>The Olive Tree</strong>
+          <strong>Le Petit Bistrot</strong>
           <small>AI Assistant · Online</small>
         </div>
-        <div className="chat-header-actions">
-          <button className="icon-btn" onClick={onResetKey} title="Change API Key">🔑</button>
+        <div className="chat-header-actions"> 
           <button className="close-btn" onClick={onClose} aria-label="Close chat">✕</button>
         </div>
       </div>

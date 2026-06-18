@@ -22,10 +22,10 @@ export default function BookingView({ booking, onDone, onModify }) {
 
   return (
     <div className="booking-view open">
-      <div className="booking-card">
-        <div className="booking-card-header">
+      <div className="booking-card booking-card-responsive">
+        <div className="booking-left">
           <div className="booking-checkmark">
-            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 52 52" fill="none">
               <circle cx="26" cy="26" r="25" stroke="#8aaa6b" strokeWidth="2" />
               <path
                 className="check-path"
@@ -37,30 +37,50 @@ export default function BookingView({ booking, onDone, onModify }) {
               />
             </svg>
           </div>
+  
           <h2>Reservation Confirmed</h2>
-          <p className="booking-subtitle">Your table at The Olive Tree is reserved</p>
+  
+          <p className="booking-subtitle">
+            Your table at Le Petit Bistrot is reserved
+          </p>
+  
+          <div className="booking-ref-badge">
+            {ref}
+          </div>
         </div>
-
-        <div className="booking-ref-badge">{ref}</div>
-
-        <div className="booking-details">
-          {rows.map(({ icon, label, value }) => (
-            <div className="booking-detail-row" key={label}>
-              <span className="icon">{icon}</span>
-              <span className="label">{label}</span>
-              <span className="value">{value}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="booking-note">
-          We look forward to welcoming you! For groups of 6+, please call us directly on +33 1 42 00 00 00.
-          Free cancellation up to 24h before your reservation.
-        </div>
-
-        <div className="booking-actions">
-          <button className="btn-primary" onClick={onDone}>Perfect, thank you!</button>
-          <button className="btn-ghost" onClick={onModify}>Modify Reservation</button>
+  
+        <div className="booking-right">
+          <div className="booking-details">
+            {rows.map(({ icon, label, value }) => (
+              <div className="booking-detail-row" key={label}>
+                <span className="icon">{icon}</span>
+                <span className="label">{label}</span>
+                <span className="value">{value}</span>
+              </div>
+            ))}
+          </div>
+  
+          <div className="booking-note">
+            We look forward to welcoming you! For groups of 6+, please call us
+            directly on +33 1 42 00 00 00. Free cancellation up to 24h before
+            your reservation.
+          </div>
+  
+          <div className="booking-actions">
+            <button
+              className="btn-primary"
+              onClick={onDone}
+            >
+              Perfect, thank you!
+            </button>
+  
+            <button
+              className="btn-ghost"
+              onClick={onModify}
+            >
+              Modify Reservation
+            </button>
+          </div>
         </div>
       </div>
     </div>

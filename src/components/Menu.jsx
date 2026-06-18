@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import LeafIcon from "./LeafIcon";
 import { MENU_DATA } from "../constants/restaurant";
 
@@ -6,8 +6,12 @@ const CATEGORIES = [
   { key: "starters", label: "Starters" },
   { key: "mains", label: "Mains" },
   { key: "desserts", label: "Desserts" },
+  { key: "drinks", label: "Drinks" },
   { key: "setmenus", label: "Set Menus" },
 ];
+
+// Number of cards visible at once before scroll arrows are needed
+const VISIBLE_CARDS_THRESHOLD = 3;
 
 function MenuCard({ name, desc, price, vegetarian, image, icon }) {
   return (
@@ -65,19 +69,103 @@ function SetMenus({ setMenus }) {
   );
 }
 
+function MenuCarousel({ items }) {
+  const trackRef = useRef(null);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const needsArrows =
+  !isMobile &&
+  items &&
+  items.length > VISIBLE_CARDS_THRESHOLD;
+
+  const updateArrowState = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    setCanScrollPrev(el.scrollLeft > 4);
+    setCanScrollNext(el.scrollLeft < maxScroll - 4);
+  }, []);
+
+  useEffect(() => {
+    // Reset scroll position and recalc arrow state whenever the item set changes
+    const el = trackRef.current;
+    if (el) el.scrollTo({ left: 0 });
+    updateArrowState();
+  }, [items, updateArrowState]);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => updateArrowState();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [updateArrowState]);
+
+  const scrollByCard = (direction) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const firstCard = el.querySelector(".mn-card");
+    const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : el.clientWidth / 3;
+    const gap = 14; // matches CSS gap between cards
+    el.scrollBy({ left: direction * (cardWidth + gap), behavior: "smooth" });
+  };
+
+  return (
+    <div className="mn-carousel">
+      <div className="mn-cards" ref={trackRef}>
+        {items?.map((item) => (
+          <MenuCard key={item.name} {...item} />
+        ))}
+      </div>
+
+      {needsArrows && (
+        <div className="mn-carousel-arrows">
+          <button
+            type="button"
+            className="mn-arrow"
+            aria-label="Scroll previous"
+            onClick={() => scrollByCard(-1)}
+            disabled={!canScrollPrev}
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            className="mn-arrow"
+            aria-label="Scroll next"
+            onClick={() => scrollByCard(1)}
+            disabled={!canScrollNext}
+          >
+            ›
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Menu({ onReserve }) {
   const [activeCat, setActiveCat] = useState("starters");
-  const { starters, mains, desserts, setMenus } = MENU_DATA;
+  const { starters, mains, desserts, drinks, setMenus } = MENU_DATA;
 
-  const catIndex = CATEGORIES.findIndex((c) => c.key === activeCat);
-  const goPrev = () =>
-    setActiveCat(
-      CATEGORIES[(catIndex - 1 + CATEGORIES.length) % CATEGORIES.length].key
-    );
-  const goNext = () =>
-    setActiveCat(CATEGORIES[(catIndex + 1) % CATEGORIES.length].key);
-
-  const itemsMap = { starters, mains, desserts };
+  const itemsMap = { starters, mains, desserts, drinks };
   const currentItems = itemsMap[activeCat];
 
   return (
@@ -113,11 +201,7 @@ export default function Menu({ onReserve }) {
             {activeCat === "setmenus" ? (
               <SetMenus setMenus={setMenus} />
             ) : (
-              <div className="mn-cards">
-                {currentItems?.map((item) => (
-                  <MenuCard key={item.name} {...item} />
-                ))}
-              </div>
+              <MenuCarousel items={currentItems} />
             )}
           </div>
         </div>
