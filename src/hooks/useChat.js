@@ -32,6 +32,14 @@ export function useChat() {
     return { displayText, chips: [] };
   };
 
+  // Date context — injected into every request so the AI knows today's date
+  const getDateContext = () => {
+    const now = new Date();
+    const day  = now.toLocaleDateString('en-US', { weekday: 'long' });
+    const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+    return `[Context: Today is ${day}, ${date}]`;
+  };
+
   //Message state helpers
   const addBotMessage = useCallback((html, isStreaming = false) => {
     const id = uid();
@@ -101,11 +109,17 @@ export function useChat() {
       setMessages((prev) => [...prev, { id: typingId, role: 'typing' }]);
 
       try {
+        const messagesWithDate = [
+          { role: 'user',      content: getDateContext() },
+          { role: 'assistant', content: 'Understood, I have noted today\'s date.' },
+          ...historyRef.current,
+        ];
+
         const res = await sendChatRequest({
           model: MODEL,
           max_tokens: 600,
           stream: true,
-          messages: historyRef.current,
+          messages: messagesWithDate,
         });
 
         if (!res.ok) {
