@@ -1,56 +1,133 @@
-export const OPENROUTER_API = 'https://openrouter.ai/api/v1/chat/completions';
-export const MODEL = 'google/gemini-2.5-flash-lite';
+export const OPENROUTER_API = "https://openrouter.ai/api/v1/chat/completions";
+export const MODEL = "google/gemini-2.5-flash-lite";
 
 export const MENU_DATA = {
   starters: [
-    { name: 'Burrata with Heirloom Tomatoes', desc: 'Fresh burrata, heritage tomatoes, basil oil, sea salt', price: '€14', vegetarian: true, image: '/images/restaurant.jpeg' },
-    { name: 'Grilled Octopus', desc: 'Chargrilled tentacles, lemon, capers, smoked paprika', price: '€17', vegetarian: false , image: '/images/restaurant.jpeg'},
-    { name: 'Mezze Platter for 2', desc: 'Hummus, baba ganoush, falafel, warm flatbread, olives', price: '€22', vegetarian: true , image: '/images/restaurant.jpeg'},
+    {
+      name: "Burrata with Heirloom Tomatoes",
+      desc: "Fresh burrata, heritage tomatoes, basil oil, sea salt",
+      price: "€14",
+      vegetarian: true,
+      image: "/images/restaurant.webp",
+    },
+    {
+      name: "Grilled Octopus",
+      desc: "Chargrilled tentacles, lemon, capers, smoked paprika",
+      price: "€17",
+      vegetarian: false,
+      image: "/images/restaurant.webp",
+    },
+    {
+      name: "Mezze Platter for 2",
+      desc: "Hummus, baba ganoush, falafel, warm flatbread, olives",
+      price: "€22",
+      vegetarian: true,
+      image: "/images/restaurant.webp",
+    },
   ],
   mains: [
-    { name: 'Branzino with Lemon Butter', desc: 'Whole sea bass, lemon butter sauce, seasonal vegetables', price: '€28', vegetarian: false , image: '/images/restaurant.jpeg'},
-    { name: 'Lamb Chops with Rosemary', desc: 'Grilled lamb, rosemary jus, roasted potatoes, mint yoghurt', price: '€32', vegetarian: false , image: '/images/restaurant.jpeg'},
-    { name: 'Mushroom Risotto', desc: 'Wild mushrooms, parmesan, truffle oil, fresh herbs', price: '€22', vegetarian: true , image: '/images/restaurant.jpeg'},
+    {
+      name: "Branzino with Lemon Butter",
+      desc: "Whole sea bass, lemon butter sauce, seasonal vegetables",
+      price: "€28",
+      vegetarian: false,
+      image: "/images/restaurant.webp",
+    },
+    {
+      name: "Lamb Chops with Rosemary",
+      desc: "Grilled lamb, rosemary jus, roasted potatoes, mint yoghurt",
+      price: "€32",
+      vegetarian: false,
+      image: "/images/restaurant.webp",
+    },
+    {
+      name: "Mushroom Risotto",
+      desc: "Wild mushrooms, parmesan, truffle oil, fresh herbs",
+      price: "€22",
+      vegetarian: true,
+      image: "/images/restaurant.webp",
+    },
   ],
   desserts: [
-    { name: 'Baklava Cheesecake', desc: 'Creamy cheesecake, pistachio baklava crust, rose water', price: '€10', vegetarian: true , image: '/images/restaurant.jpeg'},
-    { name: 'Citrus Panna Cotta', desc: 'Vanilla panna cotta, orange & lemon curd, candied zest', price: '€9', vegetarian: true , image: '/images/restaurant.jpeg'},
+    {
+      name: "Baklava Cheesecake",
+      desc: "Creamy cheesecake, pistachio baklava crust, rose water",
+      price: "€10",
+      vegetarian: true,
+      image: "/images/restaurant.webp",
+    },
+    {
+      name: "Citrus Panna Cotta",
+      desc: "Vanilla panna cotta, orange & lemon curd, candied zest",
+      price: "€9",
+      vegetarian: true,
+      image: "/images/restaurant.webp",
+    },
   ],
   setMenus: {
-    lunch: { courses: [{ label: '2 courses', price: '€22' }, { label: '3 courses', price: '€28' }], note: 'Mon–Fri 12pm–2:30pm' },
-    dinner: { courses: [{ label: '4 courses', price: '€55' }], note: 'Available every evening', featured: true },
+    lunch: {
+      courses: [
+        { label: "2 courses", price: "€22" },
+        { label: "3 courses", price: "€28" },
+      ],
+      note: "Mon–Fri 12pm–2:30pm",
+    },
+    dinner: {
+      courses: [{ label: "4 courses", price: "€55" }],
+      note: "Available every evening",
+      featured: true,
+    },
   },
 };
 
 export const HOURS = [
   {
-    day: 'Monday – Friday',
-    slots: [{ label: 'Lunch', time: '12:00pm – 2:30pm' },{ label: 'Dinner', time: '7:00pm – 10:30pm' }],
+    day: "Monday – Friday",
+    slots: [
+      { label: "Lunch", time: "12:00pm – 2:30pm" },
+      { label: "Dinner", time: "7:00pm – 10:30pm" },
+    ],
     closed: false,
   },
   {
-    day: 'Saturday',
-    slots: [{ label: 'Dinner', time: '7:00pm – 11:00pm' }],
+    day: "Saturday",
+    slots: [{ label: "Dinner", time: "7:00pm – 11:00pm" }],
     closed: false,
   },
   {
-    day: 'Sunday',
+    day: "Sunday",
     slots: [],
     closed: true,
   },
 ];
 
 export const FEATURES = [
-  { icon: '🌿', title: 'Seasonal & Fresh', desc: 'Our menu changes with the seasons. We work directly with small producers across the Mediterranean.' },
-  { icon: '🍷', title: 'Curated Wine List', desc: 'Natural wines from Greece, Lebanon and southern France — selected personally by our sommelier.' },
-  { icon: '🎉', title: 'Private Events', desc: 'Privatise the full restaurant for groups of 20–40. Perfect for celebrations and corporate dinners.' },
-  { icon: '🥗', title: 'Dietary Friendly', desc: 'Vegetarian and gluten-free options available. Just let us know — we\'ll take care of you.' },
+  {
+    icon: "🌿",
+    title: "Seasonal & Fresh",
+    desc: "Our menu changes with the seasons. We work directly with small producers across the Mediterranean.",
+  },
+  {
+    icon: "🍷",
+    title: "Curated Wine List",
+    desc: "Natural wines from Greece, Lebanon and southern France — selected personally by our sommelier.",
+  },
+  {
+    icon: "🎉",
+    title: "Private Events",
+    desc: "Privatise the full restaurant for groups of 20–40. Perfect for celebrations and corporate dinners.",
+  },
+  {
+    icon: "🥗",
+    title: "Dietary Friendly",
+    desc: "Vegetarian and gluten-free options available. Just let us know — we'll take care of you.",
+  },
 ];
 
 export const STATS = [
-  { value: '12+', label: 'Years serving Paris' },
-  { value: '100%', label: 'Fresh daily menu' },
-  { value: '4.9 ★', label: 'Google rating' },
+  { value: "12+", label: "Years serving Paris" },
+  { value: "100%", label: "Fresh daily menu" },
+  { value: "4.9 ★", label: "Google rating" },
 ];
 
 export const SYSTEM_PROMPT = `You are the friendly AI assistant for The Olive Tree, a mid-upscale Mediterranean restaurant at 12 Rue de la Paix, 75002 Paris.

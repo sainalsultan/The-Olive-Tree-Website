@@ -150,7 +150,7 @@
     position: absolute;
     inset: 0;
   
-    background-image: url('/images/restaurant.jpeg');
+    background-image: url('/images/restaurant.webp');
     background-size: cover;
     background-position: center center; /* default: desktop & mobile */
     background-repeat: no-repeat;

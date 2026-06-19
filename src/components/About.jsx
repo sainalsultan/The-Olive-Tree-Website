@@ -19,13 +19,14 @@ export default function About() {
             </h2>
 
             <p className="about-body">
-              Tucked on Rue des Martyrs in the 9th arrondissement, Le Petit Bistrot
-              was born from a simple idea to bring the warmth and soul of
-              traditional French cooking to a welcoming Parisian table.
+              Tucked on Rue des Martyrs in the 9th arrondissement, Le Petit
+              Bistrot was born from a simple idea to bring the warmth and soul
+              of traditional French cooking to a welcoming Parisian table.
             </p>
             <p className="about-body">
-              Every dish is made with seasonal ingredients sourced from carefully
-              selected French producers. No shortcuts. Just honest, beautiful food.
+              Every dish is made with seasonal ingredients sourced from
+              carefully selected French producers. No shortcuts. Just honest,
+              beautiful food.
             </p>
 
             <a href="#menu" className="about-cta-btn">
@@ -39,7 +40,7 @@ export default function About() {
             <div className="about-collage">
               <div className="col-cell col-main">
                 <img
-                  src="/images/open-kitchen.jpeg"
+                  src="/images/open-kitchen.webp"
                   alt="Our chef at work"
                   className="col-img"
                 />
@@ -47,7 +48,7 @@ export default function About() {
               </div>
               <div className="col-cell col-tr">
                 <img
-                  src="/images/menu/img-starters1.jpeg"
+                  src="/images/menu/img-starters1.webp"
                   alt="Signature dish"
                   className="col-img"
                 />
@@ -55,7 +56,7 @@ export default function About() {
               </div>
               <div className="col-cell col-br">
                 <img
-                  src="/images/fresh-produce.jpeg"
+                  src="/images/fresh-produce.webp"
                   alt="Fresh produce"
                   className="col-img"
                 />
