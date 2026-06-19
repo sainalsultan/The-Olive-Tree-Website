@@ -174,7 +174,10 @@ export default function Menu({ onReserve }) {
         {/* ── Header ── */}
         <div className="mn-header">
           <div>
-            <div className="section-label">Our Menu</div>
+          <div className="about-eyebrow">
+              <span className="about-eyebrow-line" />
+              <div className="section-label">Our Menu</div>
+            </div>
             <h2 className="mn-h2">
               Our <em>Exquisite</em> Menu
             </h2>

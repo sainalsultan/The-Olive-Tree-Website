@@ -1,11 +1,3 @@
-// ─────────────────────────────────────────────
-//  restaurant.js  –  Le Petit Bistrot
-//  AI service: Anthropic Claude (claude-sonnet-4-6)
-//  Knowledge base: loaded from faq-le-petit-bistrot-demo.md at runtime
-//  SYSTEM_PROMPT has been removed — built dynamically in useChat.js
-// ─────────────────────────────────────────────
-
-// export const ANTHROPIC_API = "http://localhost:3001/api/chat";
 export const MODEL = "claude-haiku-4-5-20251001";
 export const ANTHROPIC_VERSION = "2023-06-01";
 

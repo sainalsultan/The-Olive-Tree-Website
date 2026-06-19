@@ -1,5 +1,3 @@
-import { FEATURES, STATS } from "../constants/restaurant";
-
 export default function About() {
   return (
     <section className="section" id="about">
