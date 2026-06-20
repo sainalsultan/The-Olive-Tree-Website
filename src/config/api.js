@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://web-production-298ea8.up.railway.app";
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const API_ENDPOINTS = {
   chat: '/api/chat',

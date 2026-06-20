@@ -166,7 +166,6 @@ export function useChat() {
   const fetchFallbackSuggestions = useCallback(async (lastReply) => {
     try {
       const res = await sendChatRequest({
-        model:      MODEL,
         max_tokens: 80,
         stream:     false,
         system:     'You generate quick-reply chips for a restaurant chatbot. Output ONLY a JSON array of 2–4 short strings (max 38 chars each, with emoji). No explanation, no markdown, no backticks.',
@@ -205,7 +204,6 @@ export function useChat() {
         ];
 
         const res = await sendChatRequest({
-          model:      MODEL,
           max_tokens: 600,
           stream:     true,
           messages:   messagesWithDate,
